@@ -2022,8 +2022,8 @@ const char* _glfwGetClipboardStringCocoa(void)
 
 void _glfwUpdatePreeditCursorRectangleCocoa(_GLFWwindow* window)
 {
-    if ([windw->ns.view isEnableIME]) {
-        [[windw->ns.view inputContext] invalidateCharacterCoordinates];
+    if ([window->ns.view isEnableIME]) {
+        [[window->ns.view inputContext] invalidateCharacterCoordinates];
     }
 }
 
