@@ -371,6 +371,10 @@ static const NSRange kEmptyRange = { NSNotFound, 0 };
     [super dealloc];
 }
 
+- (BOOL) isEnableIME {
+    return _enableIME;
+}
+
 - (void) setEnableIME:(bool)enable {
     _enableIME = enable;
     if (enable) {
@@ -2018,8 +2022,9 @@ const char* _glfwGetClipboardStringCocoa(void)
 
 void _glfwUpdatePreeditCursorRectangleCocoa(_GLFWwindow* window)
 {
-    // Do nothing. Instead, implement `firstRectForCharacterRange` callback
-    // to update the position.
+    if ([windw->ns.view isEnableIME]) {
+        [[windw->ns.view inputContext] invalidateCharacterCoordinates];
+    }
 }
 
 void _glfwResetPreeditTextCocoa(_GLFWwindow* window)
